@@ -61,11 +61,28 @@ export class HomePage {
               this.maps.map.setCenter({lat: location.lat, lng: location.lng});
 
               this.location = location;
+              let marker = new google.maps.Marker({
+                map: this.maps.map,
+                animation: google.maps.Animation.DROP,
+                position: {lat: location.lat, lng: location.lng}
+            })
+            var content = `<h6>${details.name}</h6>`;
+            this.addInfo(marker, content);
 
           });
 
       });
 
+  }
+
+  addInfo(marker, content){
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.maps.map, marker);
+    })
   }
 
   searchPlace(){

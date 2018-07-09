@@ -92,11 +92,17 @@ export class GoogleMaps {
  
         let mapOptions = {
           center: latLng,
-          zoom: 15,
+          zoom: 18,
+          tilt: 30,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
- 
+
         this.map = new google.maps.Map(this.mapElement, mapOptions);
+        let marker = new google.maps.Marker({
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            position: latLng
+        })
         resolve(true);
  
       });
